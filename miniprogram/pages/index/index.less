@@ -1,9 +1,43 @@
 /**index.less**/
+@gold: #D4AF37;
+@bg-dark: #121212;
+@card-bg: #1e1e1e;
+
 page {
   height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: @bg-dark;
+  font-family: "PingFang SC", "Microsoft YaHei";
 }
+
+.container {
+  padding: 30rpx;
+
+  .header-card {
+    background: linear-gradient(145deg, #252525, #0a0a0a);
+    border: 1rpx solid fade(@gold, 30%);
+    border-radius: 24rpx;
+    padding: 80rpx 40rpx;
+    box-shadow: 0 20rpx 40rpx rgba(0, 0, 0, 0.4);
+    text-align: center;
+
+    .brand {
+      color: @gold;
+      font-size: 24rpx;
+      letter-spacing: 6rpx;
+      margin-bottom: 40rpx;
+    }
+
+    .price-value {
+      font-size: 110rpx;
+      font-weight: 700;
+      color: @gold;
+      line-height: 1.2;
+    }
+  }
+}
+
 .scrollarea {
   flex: 1;
   overflow-y: hidden;
