@@ -1,158 +1,189 @@
 /**index.less**/
 @gold: #D4AF37;
 @bg-dark: #121212;
-@card-bg: #1e1e1e;
-@gold-primary: #D4AF37;
 @gold-light: #F3E5AB;
-@bg-black: #121212;
-@card-dark: #1A1A1A;
 
-page {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background-color: @bg-dark;
-  font-family: "PingFang SC", "Microsoft YaHei";
-}
 
 .main-wrapper {
   padding: 20rpx; // 整体外边距
-  background-color: @bg-black;
   min-height: 100vh;
   height: 100vh;
-  overflow: hidden; 
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; 
+  background: linear-gradient(135deg, #222222 0%, #060606 100%);
+  backdrop-filter: blur(10px);  
 }
-.header-card, .price-row, .history-preview {
+
+.card, .history-preview {
   margin: 24rpx;
-  background: #1a1a1a; 
+  background: rgba(26, 26, 26, 0.8);  
   border: 1rpx solid rgba(212, 175, 55, 0.25); 
+  border-top: 1rpx solid rgba(255, 255, 255, 0.1); // 顶部高亮线
+  border-left: 1rpx solid rgba(255, 255, 255, 0.05);
   border-radius: 20rpx;
   box-shadow: 0 10rpx 30rpx rgba(0, 0, 0, 0.5), inset 0 0 20rpx rgba(212, 175, 55, 0.03);
+  position: relative;
+  overflow: hidden;
 }
 
-/* 顶部大卡片 */
-.header-card {
-  background: linear-gradient(135deg, #2c2c2c 0%, #000000 100%);
-  padding: 50rpx 40rpx 40rpx;
-  border-bottom-left-radius: 0rpx;
-  border-bottom-right-radius: 0rpx;
-  border-bottom: none; // 去掉底边，与下方融合
+// 顶部大卡片
+.card {
   text-align: center;
-  position: relative;
-  margin-bottom: 0rpx;
-
-  .brand {
-    color: @gold;
-    font-size: 32rpx;
-    letter-spacing: 8rpx;
-    font-weight: bold;
-    margin-bottom: 20rpx;
-    opacity: 0.8;
+  position: relative; 
+  overflow: hidden;
+  
+  // 径向渐变
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;    
+    background: radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }  
+  // 模拟扫光
+  &::after {
+    content: "";
+    position: absolute;
+    // 起始位置在左侧外部
+    top: -50%; left: -150%; 
+    width: 300%; height: 300%;    
+    background: linear-gradient(
+      45deg, 
+      transparent 45%, 
+      rgba(255, 255, 255, 0.01) 48%, 
+      rgba(255, 255, 255, 0.03) 50%, 
+      rgba(255, 255, 255, 0.01) 52%, 
+      transparent 55%
+    );
+    transform: rotate(-45deg);
+    animation: jewelShine 15s infinite ease-in-out;
   }
-  /* 基础金价样式 */
-  .base-price-section {
-    margin: 30rpx 0;
-    
-    .base-label {
-      font-size: 20rpx;
-      color: #888;
-      letter-spacing: 2rpx;
-      display: block;
-      margin-bottom: 10rpx;
-    }
 
-    .base-value {
-      color: @gold-light;
+  // 上方单卡片
+  .header-card {
+    padding: 50rpx 40rpx 40rpx;
+    background: linear-gradient(135deg, #3a3a3a 0%, #050505 100%);
+    
+    .brand {
+      color: @gold;
+      font-size: 32rpx;
+      letter-spacing: 8rpx;
+      font-weight: bold;
+      margin-bottom: 20rpx;
+      opacity: 0.8;
+    }
+    // 基础金价样式
+    .base-price-section {
+      margin: 30rpx 0;
+      
+      .base-label {
+        font-size: 20rpx;
+        color: #888;
+        letter-spacing: 2rpx;
+        display: block;
+        margin-bottom: 10rpx;
+      }
+  
+      .base-value {
+        color: @gold-light;
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+  
+        .symbol {
+          font-size: 32rpx;
+          margin-right: 8rpx;
+        }
+        .num {
+          font-size: 80rpx;
+          // 基础价格使用细字看起来帅一点
+          font-weight: 200; 
+          font-family: 'DIN Alternate', sans-serif;
+        }
+        .base-unit {
+          font-size: 24rpx;
+          margin-left: 8rpx;
+          color: #666;
+        }
+      }
+    }
+    .update-info {
+      color: #555;
+      font-size: 20rpx;
+      margin-top: 20rpx;
       display: flex;
       justify-content: center;
-      align-items: baseline;
-
-      .symbol {
-        font-size: 32rpx;
-        margin-right: 8rpx;
+      align-items: center;
+  
+      .dot {
+        color: #22c55e;
+        font-size: 14rpx;
+        margin-right: 10rpx;
+        // 呼吸灯特效
+        animation: blink 2s infinite; 
       }
-      .num {
-        font-size: 80rpx; // 足够醒目
-        font-weight: 200; // 使用细字重显得更高冷贵气
-        font-family: 'DIN Alternate', sans-serif;
+    }
+  }
+  @keyframes blink {
+    0% { opacity: 0.3; }
+    50% { opacity: 1; }
+    100% { opacity: 0.3; }
+  }
+  
+  // 下方双卡片
+  .price-row {
+    background: linear-gradient(135deg, #2a2a2a 0%, #050505 100%);
+    display: flex;
+    border-top-left-radius: 0rpx;
+    border-top-right-radius: 0rpx;
+    border-top: 1rpx solid rgba(212, 175, 55, 0.1);
+    margin-top: 0rpx;
+    overflow: hidden;
+  
+    .price-card {
+      flex: 1;
+      padding: 40rpx 20rpx;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+  
+      &.border-right {
+        // 中间的竖线
+        border-right: 1rpx solid fade(@gold, 20%); 
       }
-      .base-unit {
+  
+      .label {
+        color: #888;
         font-size: 24rpx;
-        margin-left: 8rpx;
-        color: #666;
+        margin-bottom: 16rpx;
       }
-    }
-  }
-  .update-info {
-    color: #555;
-    font-size: 20rpx;
-    margin-top: 20rpx;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .dot {
-      color: #22c55e; // 绿色的在线小点，增加系统正在运行的真实感
-      font-size: 14rpx;
-      margin-right: 10rpx;
-      animation: blink 2s infinite; // 呼吸灯特效
+  
+      .value {
+        .num {
+          font-size: 44rpx;
+          font-weight: bold;
+        }
+        .unit {
+          font-size: 20rpx;
+          color: #666;
+          margin-left: 4rpx;
+        }
+        
+        &.sell { color: @gold; }
+        &.buy { color: #ddd; }
+      }
     }
   }
 }
-@keyframes blink {
-  0% { opacity: 0.3; }
-  50% { opacity: 1; }
-  100% { opacity: 0.3; }
-}
-
-/* 下方双卡片行 */
-.price-row {
-  display: flex;
-  border-top-left-radius: 0rpx;
-  border-top-right-radius: 0rpx;
-  margin-top: 0rpx;
-  overflow: hidden;
-
-  .price-card {
-    flex: 1;
-    padding: 40rpx 20rpx;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    &.border-right {
-      border-right: 1rpx solid fade(@gold, 20%); /* 中间的竖线 */
-    }
-
-    .label {
-      color: #888;
-      font-size: 24rpx;
-      margin-bottom: 16rpx;
-    }
-
-    .value {
-      .num {
-        font-size: 44rpx;
-        font-weight: bold;
-      }
-      .unit {
-        font-size: 20rpx;
-        color: #666;
-        margin-left: 4rpx;
-      }
-      
-      &.sell { color: @gold; }
-      &.buy { color: #ddd; }
-    }
-  }
+@keyframes jewelShine {
+  0% { transform: translateX(0) rotate(-45deg); }
+  30%, 100% { transform: translateX(100%) rotate(-45deg); }
 }
 
 .history-preview {
   padding: 30rpx;
+  border-top: 1rpx solid rgba(212, 175, 55, 0.1);
 
   .section-header {
     display: flex;
@@ -174,12 +205,15 @@ page {
 
   .chart-box {
     width: 100%;
-    height: 200rpx; /* 高度不宜过高，保持水牌紧凑感 */
+    // 别太高
+    height: 200rpx;
     position: relative;    
     padding: 10rpx;
 
+    // 画布没有和其他组件一起滚动，需要注意这里的特殊处理
     .trend-canvas {
-      position: absolute; // 绝对定位，重叠在一起
+      // 绝对定位，重叠在一起，配合禁止滚动使用
+      position: absolute; 
       top: 10;
       left: 10;
       width: 100% !important;

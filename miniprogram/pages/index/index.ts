@@ -21,6 +21,7 @@ Component({
     async fetchData() {
       try {
         this.setData({ loading: true });
+        // 获取最新价格和历史7天价格
         const latest = await request<GoldPrice>('/api/GoldPrice/latest');
         const history = await request<GoldPrice[]>('/api/GoldPrice/history?days=7');
         
@@ -40,9 +41,9 @@ Component({
         this.setData({ loading: false });
       }
     },
-    // index.ts 内部方法
+    // 绘制历史走向折线图
     async drawTrendChart(history: GoldPrice[]) {
-      // 严谨校验：如果数据不足，直接清空画布或返回，不执行后续逻辑
+      // 数据不足直接返回
       if (!history || history.length < 2) {
         console.warn('历史数据不足，无法绘制趋势图');
         return;
@@ -121,6 +122,5 @@ Component({
           });
         });
     }
-  },
-  
+  },  
 })

@@ -17,5 +17,25 @@
     "bigPackageSizeSupport": false,
     "checkInvalidKey": true,
     "ignoreDevUnusedFiles": true
+  },
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "原生全屏",
+          "pathName": "pages/index/index",
+          "query": "",
+          "scene": null,
+          "launchMode": "defaultNativeFunctionalized"
+        },
+        {
+          "name": "半屏",
+          "pathName": "pages/index/index",
+          "query": "",
+          "launchMode": "embedded",
+          "scene": 1001
+        }
+      ]
+    }
   }
 }
