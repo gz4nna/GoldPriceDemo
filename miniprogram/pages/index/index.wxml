@@ -1,10 +1,54 @@
 <!--index.wxml-->
-<navigation-bar title="Weixin" back="{{false}}" color="black" background="#FFF"></navigation-bar>
-<scroll-view class="scrollarea" scroll-y type="list">
-  <view class="container">
-    <view wx:if="{{latestPrice}}">
-      <text>当前金价：{{latestPrice.salePrice}}</text>
-      <text>更新时间：{{latestPrice.updateTime}}</text>
+<navigation-bar title="黄金报价" back="{{false}}" color="black" background="#FFF"></navigation-bar>
+
+<view class="main-wrapper">
+  <view wx:if="{{latestPrice}}" class="main-wrapper">
+    
+    <view class="header-card">
+      <view class="brand">珠宝珍选</view>
+
+      <view class="base-price-section">
+        <text class="base-label">实时大盘基准价</text>
+        <view class="base-value">
+          <text class="symbol">¥</text>
+          <text class="num">{{latestPrice.basePrice}}</text>
+          <text class="base-unit">/克</text>
+        </view>
+      </view>
+
+      <view class="update-info">
+        <wxs src="./format.wxs" module="utils" />
+        <text class="dot">●</text> 市场数据最后更新：{{utils.formatTime(latestPrice.updateTime)}}
+      </view>
+    </view>
+
+    <view class="price-row">
+      <view class="price-card border-right">
+        <text class="label">实时零售价</text>
+        <view class="value sell">
+          <text class="num">{{latestPrice.salePrice}}</text>
+          <text class="unit">元/克</text>
+        </view>
+      </view>
+      
+      <view class="price-card">
+        <text class="label">参考回收价</text>
+        <view class="value buy">
+          <text class="num">{{latestPrice.officialPrice}}</text>
+          <text class="unit">元/克</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="history-preview">
+      <view class="section-header">
+        <text class="section-title">7日趋势展望</text>
+        <text class="section-more" bindtap="goToHistory">详情 ></text>
+      </view>
+
+      <view class="chart-box">        
+        <canvas type="2d" id="trendChart" class="trend-canvas" />
+      </view>
     </view>
   </view>
-</scroll-view>
+</view>

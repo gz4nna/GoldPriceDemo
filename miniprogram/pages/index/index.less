@@ -2,6 +2,10 @@
 @gold: #D4AF37;
 @bg-dark: #121212;
 @card-bg: #1e1e1e;
+@gold-primary: #D4AF37;
+@gold-light: #F3E5AB;
+@bg-black: #121212;
+@card-dark: #1A1A1A;
 
 page {
   height: 100vh;
@@ -11,85 +15,175 @@ page {
   font-family: "PingFang SC", "Microsoft YaHei";
 }
 
-.container {
-  padding: 30rpx;
+.main-wrapper {
+  padding: 20rpx; // 整体外边距
+  background-color: @bg-black;
+  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden; 
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; 
+}
+.header-card, .price-row, .history-preview {
+  margin: 24rpx;
+  background: #1a1a1a; 
+  border: 1rpx solid rgba(212, 175, 55, 0.25); 
+  border-radius: 20rpx;
+  box-shadow: 0 10rpx 30rpx rgba(0, 0, 0, 0.5), inset 0 0 20rpx rgba(212, 175, 55, 0.03);
+}
 
-  .header-card {
-    background: linear-gradient(145deg, #252525, #0a0a0a);
-    border: 1rpx solid fade(@gold, 30%);
-    border-radius: 24rpx;
-    padding: 80rpx 40rpx;
-    box-shadow: 0 20rpx 40rpx rgba(0, 0, 0, 0.4);
-    text-align: center;
+/* 顶部大卡片 */
+.header-card {
+  background: linear-gradient(135deg, #2c2c2c 0%, #000000 100%);
+  padding: 50rpx 40rpx 40rpx;
+  border-bottom-left-radius: 0rpx;
+  border-bottom-right-radius: 0rpx;
+  border-bottom: none; // 去掉底边，与下方融合
+  text-align: center;
+  position: relative;
+  margin-bottom: 0rpx;
 
-    .brand {
-      color: @gold;
-      font-size: 24rpx;
-      letter-spacing: 6rpx;
-      margin-bottom: 40rpx;
+  .brand {
+    color: @gold;
+    font-size: 32rpx;
+    letter-spacing: 8rpx;
+    font-weight: bold;
+    margin-bottom: 20rpx;
+    opacity: 0.8;
+  }
+  /* 基础金价样式 */
+  .base-price-section {
+    margin: 30rpx 0;
+    
+    .base-label {
+      font-size: 20rpx;
+      color: #888;
+      letter-spacing: 2rpx;
+      display: block;
+      margin-bottom: 10rpx;
     }
 
-    .price-value {
-      font-size: 110rpx;
-      font-weight: 700;
-      color: @gold;
-      line-height: 1.2;
+    .base-value {
+      color: @gold-light;
+      display: flex;
+      justify-content: center;
+      align-items: baseline;
+
+      .symbol {
+        font-size: 32rpx;
+        margin-right: 8rpx;
+      }
+      .num {
+        font-size: 80rpx; // 足够醒目
+        font-weight: 200; // 使用细字重显得更高冷贵气
+        font-family: 'DIN Alternate', sans-serif;
+      }
+      .base-unit {
+        font-size: 24rpx;
+        margin-left: 8rpx;
+        color: #666;
+      }
+    }
+  }
+  .update-info {
+    color: #555;
+    font-size: 20rpx;
+    margin-top: 20rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .dot {
+      color: #22c55e; // 绿色的在线小点，增加系统正在运行的真实感
+      font-size: 14rpx;
+      margin-right: 10rpx;
+      animation: blink 2s infinite; // 呼吸灯特效
+    }
+  }
+}
+@keyframes blink {
+  0% { opacity: 0.3; }
+  50% { opacity: 1; }
+  100% { opacity: 0.3; }
+}
+
+/* 下方双卡片行 */
+.price-row {
+  display: flex;
+  border-top-left-radius: 0rpx;
+  border-top-right-radius: 0rpx;
+  margin-top: 0rpx;
+  overflow: hidden;
+
+  .price-card {
+    flex: 1;
+    padding: 40rpx 20rpx;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &.border-right {
+      border-right: 1rpx solid fade(@gold, 20%); /* 中间的竖线 */
+    }
+
+    .label {
+      color: #888;
+      font-size: 24rpx;
+      margin-bottom: 16rpx;
+    }
+
+    .value {
+      .num {
+        font-size: 44rpx;
+        font-weight: bold;
+      }
+      .unit {
+        font-size: 20rpx;
+        color: #666;
+        margin-left: 4rpx;
+      }
+      
+      &.sell { color: @gold; }
+      &.buy { color: #ddd; }
     }
   }
 }
 
-.scrollarea {
-  flex: 1;
-  overflow-y: hidden;
-}
+.history-preview {
+  padding: 30rpx;
 
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: #aaa;
-  width: 80%;
-}
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30rpx;
 
-.userinfo-avatar {
-  overflow: hidden;
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-}
+    .section-title {
+      font-size: 24rpx;
+      color: @gold;
+      font-weight: 300;
+      letter-spacing: 2rpx;
+    }
+    .section-more {
+      font-size: 20rpx;
+      color: #555;
+    }
+  }
 
-.usermotto {
-  margin-top: 200px;
-}
-.avatar-wrapper {
-  padding: 0;
-  width: 56px !important;
-  border-radius: 8px;
-  margin-top: 40px;
-  margin-bottom: 40px;
-}
+  .chart-box {
+    width: 100%;
+    height: 200rpx; /* 高度不宜过高，保持水牌紧凑感 */
+    position: relative;    
+    padding: 10rpx;
 
-.avatar {
-  display: block;
-  width: 56px;
-  height: 56px;
-}
-
-.nickname-wrapper {
-  display: flex;
-  width: 100%;
-  padding: 16px;
-  box-sizing: border-box;
-  border-top: .5px solid rgba(0, 0, 0, 0.1);
-  border-bottom: .5px solid rgba(0, 0, 0, 0.1);
-  color: black;
-}
-
-.nickname-label {
-  width: 105px;
-}
-
-.nickname-input {
-  flex: 1;
+    .trend-canvas {
+      position: absolute; // 绝对定位，重叠在一起
+      top: 10;
+      left: 10;
+      width: 100% !important;
+      height: 100% !important;
+    }
+  }
 }

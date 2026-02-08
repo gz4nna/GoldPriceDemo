@@ -2,7 +2,7 @@
 const DEFAULT_URL = 'https://api.gz4nna.com';
 
 export const request = <T>(url: string, method: 'GET' | 'POST' = 'GET', data: any = {}): Promise<T> => {
-  // 从缓存读取 URL，实现动态切换
+  // 从微信提供的本地存储中读取 URL，以防极端情况下切换 api 来源
   const baseUrl = wx.getStorageSync('baseUrl') || DEFAULT_URL;
 
   return new Promise((resolve, reject) => {

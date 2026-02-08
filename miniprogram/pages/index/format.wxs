@@ -1,0 +1,17 @@
+// format.wxs
+var formatTime = function(dateStr) {
+  if (!dateStr) return '';
+  var date = getDate(dateStr);
+  var now = getDate();
+  
+  // 如果是今天，显示 "今天 14:30"
+  if (date.toDateString() === now.toDateString()) {
+    return '今日 ' + date.getHours() + ':' + (date.getMinutes() < 10 ? '0' : '') + date.getMinutes();
+  }
+  // 否则显示日期
+  return (date.getMonth() + 1) + '月' + date.getDate() + '日';
+}
+
+module.exports = {
+  formatTime: formatTime
+};
