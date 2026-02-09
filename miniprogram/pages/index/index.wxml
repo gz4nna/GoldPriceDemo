@@ -32,7 +32,7 @@
       <view class="price-card">
         <text class="label">参考回收价</text>
         <view class="value buy">
-          <text class="num">{{latestPrice.officialPrice}}</text>
+          <text class="num">{{latestPrice.recyclePrice}}</text>
           <text class="unit">元/克</text>
         </view>
       </view>
