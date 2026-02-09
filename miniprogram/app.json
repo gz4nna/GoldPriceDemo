@@ -1,7 +1,8 @@
-{  
+{
   "pages": [
-    "pages/index/index",
-    "pages/logs/logs"
+    "pages/digitBoard/digitBoard",
+    "pages/historyTrend/historyTrend",
+    "pages/logs/logs"    
   ],
   "window": {
     "navigationBarTextStyle": "black",

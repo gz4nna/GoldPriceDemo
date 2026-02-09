@@ -1,4 +1,4 @@
-// index.ts
+// digitalSignage.ts
 import { request } from '../../utils/request';
 import { GoldPrice } from '../../models/gold_price';
 
@@ -121,6 +121,10 @@ Component({
             }
           });
         });
+    },
+    goToHistoryTrend(){
+      wx.navigateTo({ url: '/pages/historyTrend/historyTrend' });
     }
+
   },  
 })

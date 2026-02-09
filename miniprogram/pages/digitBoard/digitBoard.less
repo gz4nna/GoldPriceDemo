@@ -1,4 +1,4 @@
-/**index.less**/
+/**digitalSignage.less**/
 @gold: #D4AF37;
 @bg-dark: #121212;
 @gold-light: #F3E5AB;
@@ -26,6 +26,7 @@
   overflow: hidden;
 }
 
+
 // 顶部大卡片
 .card {
   text-align: center;
@@ -39,7 +40,7 @@
     top: 0; left: 0; right: 0; bottom: 0;    
     background: radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
     pointer-events: none;
-  }  
+  }    
   // 模拟扫光
   &::after {
     content: "";
@@ -49,15 +50,15 @@
     width: 300%; height: 300%;    
     background: linear-gradient(
       45deg, 
-      transparent 45%, 
-      rgba(255, 255, 255, 0.01) 48%, 
-      rgba(255, 255, 255, 0.03) 50%, 
-      rgba(255, 255, 255, 0.01) 52%, 
-      transparent 55%
+      transparent 30%, 
+      rgba(255, 255, 255, 0.03) 30%, 
+      rgba(255, 255, 255, 0.07) 50%, 
+      rgba(255, 255, 255, 0.03) 100%, 
+      transparent 60%
     );
     transform: rotate(-45deg);
-    animation: jewelShine 15s infinite ease-in-out;
-  }
+    animation: jewelShine 10s infinite cubic-bezier(0.07, 0.6, 0.07, 0.6);
+  }  
 
   // 上方单卡片
   .header-card {
@@ -174,7 +175,7 @@
         &.buy { color: #ddd; }
       }
     }
-  }
+  }  
 }
 @keyframes jewelShine {
   0% { transform: translateX(0) rotate(-45deg); }

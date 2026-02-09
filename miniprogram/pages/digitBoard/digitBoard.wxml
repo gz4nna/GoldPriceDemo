@@ -1,4 +1,4 @@
-<!--index.wxml-->
+<!--digitalSignage.wxml-->
 <navigation-bar title="黄金报价" back="{{true}}" color="black" background="#FFF" ></navigation-bar>
 <view wx:if="{{latestPrice}}" class="main-wrapper">  
   <view class="card">
@@ -15,7 +15,7 @@
       </view>
 
       <view class="update-info">
-        <wxs src="./format.wxs" module="utils" />
+        <wxs src="../../utils/format.wxs" module="utils" />
         <text class="dot">●</text> 此次报价 {{utils.formatTime(latestPrice.updateTime)}} 刷新，即时准确价格以交易系统为准
       </view>
     </view>
@@ -41,8 +41,8 @@
 
   <view class="history-preview">
     <view class="section-header">
-      <text class="section-title">7日趋势展望</text>
-      <text class="section-more" bindtap="goToHistory">详情 ></text>
+      <text class="section-title">7日趋势展望</text>      
+      <text class="section-more" bindtap="goToHistoryTrend">详情 ></text>
     </view>
 
     <view class="chart-box">        

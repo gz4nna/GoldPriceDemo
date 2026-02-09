@@ -1,0 +1,34 @@
+<!--pages/historyTrend/historyTrend.wxml-->
+<navigation-bar title="黄金报价 历史趋势" back="{{true}}" color="black" background="#FFF" ></navigation-bar>
+<view class="main-wrapper">  
+  <view class="history-container">
+    <view class="filter-bar">
+      <view class="range-tabs">
+        <view class="tab {{range === '7d' ? 'active' : ''}}" bindtap="changeRange" data-val="7d">一星期</view>
+        <view class="tab {{range === '30d' ? 'active' : ''}}" bindtap="changeRange" data-val="30d">一个月</view>
+        <view class="tab {{range === '90d' ? 'active' : ''}}" bindtap="changeRange" data-val="90d">三个月</view>
+      </view>
+      <picker bindchange="changeRecords" range="{{recordOptions}}">
+        <view class="record-picker">数量: {{records || '10'}}</view>
+      </picker>
+    </view>
+
+    <view class="chart-section">
+      <scroll-view class="chart-scroll" scroll-x scroll-left="{{chartScrollLeft}}">
+        <view class="canvas-holder" style="width: {{canvasWidth}}px;">
+          <canvas type="2d" id="trendChart" class="trend-canvas" />
+        </view>
+      </scroll-view>
+    </view>
+
+    <view class="list-title">历史价格清单</view>
+    <scroll-view class="data-list" scroll-y>
+      <wxs src="../../utils/format.wxs" module="utils" />
+      <view wx:for="{{history}}" wx:key="updateTime" class="list-item">
+        <text class="date">{{utils.formatTime(item.updateTime)}}</text>
+        <text class="price">¥{{item.basePrice}}</text>
+        <text class="trend"></text>
+      </view>
+    </scroll-view>
+  </view>
+</view>
