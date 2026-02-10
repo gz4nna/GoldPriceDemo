@@ -67,13 +67,13 @@ Component({
           // 取 basePrice 作为数据源
           const prices = [...history].reverse().map(item => item.basePrice);
           // 上下留空
-          const maxPrice = Math.max(...prices) * 1.01;
-          const minPrice = Math.min(...prices) * 0.99;
+          const maxPrice = Math.max(...prices) * 1.005;
+          const minPrice = Math.min(...prices) * 0.995;
           const range = maxPrice - minPrice;
 
           // 绘图坐标计算
           const points = prices.map((p, i) => ({
-            x: (i / (prices.length - 1)) * width,
+            x: (i / (prices.length - 1)) * width * 0.95,
             y: height - ((p - minPrice) / range) * height
           }));
 

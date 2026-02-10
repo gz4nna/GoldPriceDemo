@@ -10,9 +10,6 @@ export const request = <T>(url: string, method: 'GET' | 'POST' = 'GET', data: an
       url: baseUrl + url,
       method,
       data,
-      header: {
-        'X-Admin-Token': 'gz4nna_admin_token'
-      },
       success: (res) => {
         if (res.statusCode === 200) {
           resolve(res.data as T);

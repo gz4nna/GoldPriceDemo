@@ -16,7 +16,12 @@
     <view class="chart-section">
       <scroll-view class="chart-scroll" scroll-x scroll-left="{{chartScrollLeft}}">
         <view class="canvas-holder" style="width: {{canvasWidth}}px;">
-          <canvas type="2d" id="trendChart" class="trend-canvas" />
+          <canvas 
+            type="2d" 
+            id="trendChart" 
+            class="trend-canvas" 
+            style="width: {{canvasWidth}}px;" 
+          />
         </view>
       </scroll-view>
     </view>

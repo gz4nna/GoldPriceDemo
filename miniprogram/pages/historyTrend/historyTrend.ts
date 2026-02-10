@@ -38,7 +38,7 @@ Component({
         const timer = setTimeout(() => {
           this.drawTrendChart(res, calculatedWidth);
           // 滚动到最右侧
-          this.setData({ chartScrollLeft: calculatedWidth * 2 });
+          this.setData({ chartScrollLeft: calculatedWidth * 2});
           clearTimeout(timer);
         }, 300); 
       });
@@ -51,11 +51,11 @@ Component({
           if (!res[0]) return;
           const canvas = res[0].node;
           const ctx = canvas.getContext('2d');
-          const width = calculatedWidth;
+          const width = Math.max(res[0].width, calculatedWidth);
           const height = res[0].height || 250;
     
           const dpr = wx.getSystemInfoSync().pixelRatio;
-          canvas.width = width * dpr;
+          canvas.width = width * dpr ;
           canvas.height = height * dpr;
           ctx.scale(dpr, dpr);
     
@@ -73,7 +73,7 @@ Component({
           const displayRange = displayMax - displayMin;
     
           // 左右留白
-          const margin = 40; 
+          const margin = 50; 
           const drawWidth = width - (margin * 2);
     
           // 坐标计算
